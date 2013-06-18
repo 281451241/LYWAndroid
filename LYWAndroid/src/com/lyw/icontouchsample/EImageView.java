@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 
 public class EImageView extends ImageView
@@ -21,6 +22,7 @@ public class EImageView extends ImageView
 
 	private ViewBox viewBox;
 	private DragController dragController;
+	CellLayout mCellLayout;
 
 	// Initial the view.
 	public EImageView(Context context, AttributeSet attribute)
@@ -34,6 +36,7 @@ public class EImageView extends ImageView
 		super(context, attribute, style);
 		viewBox = new ViewBox();
 		dragController = new DragController(Main.layout);
+		mCellLayout = new CellLayout(context);
 		mState = STATE_STOP;
 	}
 
@@ -69,7 +72,8 @@ public class EImageView extends ImageView
 			final int iTop = getTop();
 			layout(iLeft + iDeltx, iTop + iDelty, iLeft + iDeltx + getWidth(),
 					iTop + iDelty + getHeight());
-			dragController.startDrag(this);
+			
+//			dragController.startDrag(this);
 			mPreviousx = iCurrentx - iDeltx;
 			mPreviousy = iCurrenty - iDelty;
 			break;
@@ -83,6 +87,11 @@ public class EImageView extends ImageView
 			final int iTop1 = viewBox.getTop(mCurBox);
 			layout(iLeft1 + iDeltx1, iTop1 + iDelty1, iLeft1 + iDeltx1
 					+ getWidth(), iTop1 + iDelty1 + getHeight());
+			
+			mCellLayout.findNearestArea(160, 160, 1, 1, null);
+			mCellLayout.findNearestArea(200, 200, 1, 1, null);
+			mCellLayout.findNearestArea(160, 160, 2, 1, null);
+			
 			mPreviousx = iCurrentx - iDeltx1;
 			mPreviousy = iCurrenty - iDelty1;
 			Main.boxList[mCurBox] = true;
