@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <!-- <ImageView -->
+    <!-- android:id="@+id/ImageView03" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="91dp" -->
+    <!-- android:layout_weight="0.15" -->
+    <!-- android:src="@android:drawable/alert_dark_frame" /> -->
+
+
+    <!-- <ImageView -->
+    <!-- android:id="@+id/ImageView02" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="91dp" -->
+    <!-- android:layout_weight="0.15" -->
+    <!-- android:src="@drawable/ic_launcher" /> -->
+
+    <com.lyw.icontouchsample.EImageView
+        android:id="@+id/eImageView1"
+        android:layout_width="0dp"
+        android:layout_height="76dp"
+        android:layout_weight="1"
+        android:src="@drawable/blur" />
+
+    <com.lyw.icontouchsample.EImageView
+        android:id="@+id/eImageView2"
+        android:layout_width="0dp"
+        android:layout_height="77dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_launcher" />
+
+    <com.lyw.icontouchsample.EImageView
+        android:id="@+id/eImageView3"
+        android:layout_width="0dp"
+        android:layout_height="77dp"
+        android:layout_weight="1"
+        android:src="@drawable/test_keyboard_arrow_left_normal" />
+
+</LinearLayout>
