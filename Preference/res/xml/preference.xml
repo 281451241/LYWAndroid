@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:preference="http://schemas.android.com/apk/res/com.example.preference" >
+
+    <com.example.preference.MyPreference
+        android:key="storeAfter"
+        preference:img="@drawable/ic_launcher"
+        preference:ischeck="false"
+        preference:title="This is Own Preference" />
+    <com.example.preference.MyPreference
+        android:key="notification"
+        preference:img="@drawable/ic_launcher"
+        preference:ischeck="true"
+        preference:title="This is Two Preference" />
+
+</PreferenceScreen>

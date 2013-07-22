@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <com.example.togglebuttonprference.ToggleButtonPrference
+        android:key="set_gogglebutton_key"
+        android:title="TogButPre组件"
+        android:summary="我的ToButPre组件"
+        android:widgetLayout="@layout/set_custom_right_togglebutton"
+        />
+
+</PreferenceScreen>
