@@ -5,12 +5,10 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +18,7 @@ import android.widget.TextView;
 import com.example.preference.R;
 
 public class MainActivity extends Activity {
+	private static final String TAG = "MainActivity";
 	private ListView lv;
 	private BaseAdapter adapter;
 	private List<Item> list;
@@ -33,54 +32,34 @@ public class MainActivity extends Activity {
 
 		lv = (ListView) findViewById(R.id.lv);
 
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
-		data.add("aaaaaaaaaaaaaaaaaaaa");
+		for (int i = 0; i < 20; i++)
+			data.add("aa" + i + "------" + i);
 
-//		adapter = new MyAdapter();
-//		lv.setAdapter(adapter);
-		
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View view, int pos,
-					long arg3) {
-				Item item = list.get(pos);
-				System.out.println(item.name);
-			}
-		});
-		
+		// 若同时设setOnItemClickListener和getview中设置的onclicklistener，
+		// onclicklistener会拦截setOnItemClickListener相应
+		// 这里点击时，button会被覆盖；在getview中设置的onclick却不会覆盖；
+		// lv.setOnItemClickListener(new OnItemClickListener() {
+		// @Override
+		// public void onItemClick(AdapterView<?> arg0, View view, int position,
+		// long arg3) {
+		// }
+		// });
+
 		init();
 		initAdapter();
 	}
 
 	// 数据初始化
-	private void init()
-	{
+	private void init() {
 		if (list == null)
 			list = new ArrayList<Item>();
 		else
 			list.clear();
-		for (String s : data)
-		{
-			list.add(new Item(s, false, LANGUAGE_STATE_UNPROVIDED));
+		for (String s : data) {
+			list.add(new Item(s, false));
 		}
 	}
-	
+
 	// 刷新适配器
 	public void initAdapter() {
 		if (adapter == null) {
@@ -110,79 +89,66 @@ public class MainActivity extends Activity {
 		@Override
 		public View getView(final int position, View convertView,
 				final ViewGroup parent) {
-			
-			// TODO 呢度，需要弄一个pos记录每个item的位置，
-			// 不然滚动完，就会消失
-			final View view;
-			TextView tv;
-			final Button bt;
-			final CheckBox cb;
+			ViewHolder holder;
+			if (convertView == null
+					|| (holder = (ViewHolder) convertView.getTag()) == null) {
+				convertView = View.inflate(MainActivity.this,
+						R.layout.listview_item, null);
 
-			view = LayoutInflater.from(MainActivity.this).inflate(
-					R.layout.listview_item, null);
-			view.setBackgroundResource(android.R.drawable.list_selector_background);
+				holder = new ViewHolder();
+				holder.tv = (TextView) convertView
+						.findViewById(R.id.lv_item_tv);
 
-			tv = (TextView) view.findViewById(R.id.lv_item_tv);
-			tv.setText(data.get(position));
+				holder.bt = (Button) convertView.findViewById(R.id.lv_item_bt);
+				holder.bt.setFocusable(false);
 
-			bt = (Button) view.findViewById(R.id.lv_item_bt);
-			bt.setBackgroundResource(android.R.drawable.btn_default);
-			bt.setFocusable(false);
+				holder.cb = (CheckBox) convertView
+						.findViewById(R.id.lv_item_cb);
+				convertView.setTag(holder);
+			}
+			final Item item = getItem(position);
+			holder.tv.setText(item.name);
+			holder.cb.setChecked(item.isCheck);
 
-			cb = (CheckBox) view.findViewById(R.id.lv_item_cb);
+			final CheckBox box = holder.cb;
 
-			view.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					cb.setChecked(!cb.isChecked());
-					System.out.println("itemview onclicked!! pos: " + position);
-				}
-			});
-
-			bt.setOnClickListener(new OnClickListener() {
+			convertView.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					System.out.println("button onclicked!! pos: " + position);
+					Log.d(TAG, ("itemview onclicked!! pos: " + position));
+					box.setChecked(!box.isChecked());
+					item.isCheck = box.isChecked();
 				}
 			});
 
-			return view;
+			holder.bt.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Log.d(TAG, ("button onclicked!! pos: " + position) + '\n'
+							+ "item name: " + item.name);
+				}
+			});
+
+			return convertView;
 		}
 
 	}
-	
-	private class Item
-	{
-		String name;
-		boolean isBuy = false;
-		int useStatus = LANGUAGE_STATE_UNPROVIDED;
 
-		Item(String name, boolean isBuy, int state)
-		{
+	private class Item {
+		String name;
+		boolean isCheck = false;
+
+		Item(String name, boolean isBuy) {
 			this.name = name;
-			this.isBuy = isBuy;
-			this.useStatus = state;
+			this.isCheck = isBuy;
 		}
 	}
 
 	private class ViewHolder {
-		TextView text;
-		Button button;
-		CheckBox box;
+		TextView tv;
+		Button bt;
+		CheckBox cb;
 	}
-	
-	/**
-	 * 表示该语言包仍未下载
-	 */
-	private final static int LANGUAGE_STATE_UNPROVIDED = 0;
-	/**
-	 * 表示该语言包已经下载,但还没启用
-	 */
-	private final static int LANGUAGE_STATE_PROVIDED = 1;
-	/**
-	 * 表示该语言包已经下载,并已启用
-	 */
-	private final static int LANGUAGE_STATE_ENABLED = 2;
 }

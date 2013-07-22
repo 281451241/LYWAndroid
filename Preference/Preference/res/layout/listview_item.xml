@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@android:drawable/list_selector_background" >
 
     <TextView
         android:id="@+id/lv_item_tv"
@@ -17,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/button_status"
+        android:background="@android:drawable/btn_default_small"
         android:text="BUY" />
 
     <CheckBox
