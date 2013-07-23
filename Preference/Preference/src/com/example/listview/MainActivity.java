@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 			data.add("aa" + i + "------" + i);
 
 		// 若同时设setOnItemClickListener和getview中设置的onclicklistener，
-		// onclicklistener会拦截setOnItemClickListener相应
+		// onclicklistener会拦截setOnItemClickListener
 		// 这里点击时，button会被覆盖；在getview中设置的onclick却不会覆盖；
 		// lv.setOnItemClickListener(new OnItemClickListener() {
 		// @Override
