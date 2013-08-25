@@ -1,10 +1,8 @@
 package com.example.preference;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -46,20 +44,6 @@ public class MainActivity extends PreferenceActivity
 				return true;
 			}
 		});
-
-		// bt = (Button) findViewById(R.id.bt);
-		//
-		// bt.setOnClickListener(new OnClickListener()
-		// {
-		//
-		// @Override
-		// public void onClick(View v)
-		// {
-		// System.out.println("Button onclick!!!!");
-		// }
-		// });
-		// bt.setFocusable(false);
-		// bt.setClickable(true);
 	}
 
 	public static boolean getStoreValue(Context context)

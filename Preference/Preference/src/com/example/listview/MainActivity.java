@@ -100,13 +100,12 @@ public class MainActivity extends Activity {
 						.findViewById(R.id.lv_item_tv);
 
 				holder.bt = (Button) convertView.findViewById(R.id.lv_item_bt);
-				holder.bt.setFocusable(false);
 
 				holder.cb = (CheckBox) convertView
 						.findViewById(R.id.lv_item_cb);
 				convertView.setTag(holder);
 			}
-			final Item item = getItem(position);
+			Item item = getItem(position);
 			holder.tv.setText(item.name);
 			holder.cb.setChecked(item.isCheck);
 
@@ -117,8 +116,9 @@ public class MainActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					Log.d(TAG, ("itemview onclicked!! pos: " + position));
+					Item onClickitem = list.get(position);
 					box.setChecked(!box.isChecked());
-					item.isCheck = box.isChecked();
+					onClickitem.isCheck = box.isChecked();
 				}
 			});
 
@@ -127,7 +127,7 @@ public class MainActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					Log.d(TAG, ("button onclicked!! pos: " + position) + '\n'
-							+ "item name: " + item.name);
+							+ "item name: " + list.get(position).name);
 				}
 			});
 
