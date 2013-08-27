@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Zcalendar</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="editclass_class_fullname_hint">课程名称</string>
+    <string name="editclass_class_shortname_hint">简称</string>
+    <string name="editclass_class_teacher_hint">教师</string>
+    <string name="editclass_class_period_hint">学时</string>
+    <string name="editclass_class_annotation_hint">注解</string>
+    <string name="editclass_class_building_hint">教学楼</string>
+    <string name="editclass_class_room_hint">教室</string>
+	
+</resources>
