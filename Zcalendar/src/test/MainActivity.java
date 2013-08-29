@@ -1,14 +1,13 @@
 package test;
 
 
-import com.example.zcalendar.R;
-import com.example.zcalendar.R.layout;
-import com.smallteam.xyt.util.Log;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.zcalendar.R;
+import com.smallteam.xyt.util.Log;
 
 public class MainActivity extends Activity {
 
