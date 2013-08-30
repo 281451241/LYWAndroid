@@ -50,18 +50,28 @@ public class MyTable extends View {
 			}
 		}
 		
+		paint.setStyle(Style.FILL);
 		paint.setColor(mTextColor);
 		paint.setTextSize(mTextSize);
+		paint.setStrokeWidth(1);
 		for (int i = 0, n=WEEK_DATE.length; i < n; i++) {
 			float label_length = paint.measureText(WEEK_DATE[i]);
-//			if (label_length > getWidth()) {
-//				label_length = getWidth();
-//			}
 			// 为了居中文字
 			System.out.println("i: " + i);
 			canvas.drawText(WEEK_DATE[i],
 					(grid_width - label_length) / 2 + grid_width * (i+1),
 					(grid_width + label_length) / 2, paint);
+		}
+		
+		
+		for (int i = 0, n=NUM_CLASS.length; i < n; i++) {
+			float label_length = paint.measureText(NUM_CLASS[i]);
+			// 为了居中文字
+			System.out.println("i: " + i);
+			canvas.drawText(NUM_CLASS[i],
+					(grid_width - label_length) / 2,
+					(grid_width + label_length) / 2 + grid_width * (i+1),
+					paint);
 		}
 	}
 	
