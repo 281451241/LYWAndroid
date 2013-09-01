@@ -3,6 +3,7 @@
 
     <string name="app_name">Zcalendar</string>
     <string name="editclass">编辑课室</string>
+    <string name="test">测试View</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="editclass_class_fullname_hint">课程名称</string>
